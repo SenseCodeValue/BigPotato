@@ -1,9 +1,13 @@
 # 알뜰살뜰 BIXBY Capsule  by Big Potato
 
+### 서비스 설명
+
 알뜰살뜰은 사용자의 위치 및 발화한 지역을 기준으로 농수산물의 가격 제공 및 가격 비교를 해주어 사용자로 하여금 알뜰살뜰한 소비를 하도록 도와주는 Capsule입니다.
 알뜰살뜰은 한국농수산식품유통공사(이하 kamis)에서 제공하는 API를 활용하여 유통되는 농수산물의 최근 30일간의 데이터를 비교하여 현재 가격, 최근 동향, 평균 가격, 최고가 및 최저가, 그래프를 사용자에게 보여줘 알뜰살뜰한 소비 생활을 도와주는 캡슐입니다. 또한, 카카오 API를 통해 현재 사용자 위치에 기반한 정보를 제공해줍니다. 모든 정보는 제작한 API 서버로부터 전처리 후에 캡슐에 보내지게 됩니다.
 
-1) 제공가능한 품목
+
+
+###  제공가능한 품목
 식량작물(7품목 : 8품종)
 쌀, 찹쌀, 콩(백태국산), 팥(국산), 녹두, 고구마(밤), 감자(수미, 대지마)
 
@@ -29,31 +33,35 @@
 위의 18개 도시와 더불어 고성, 속초 양양, 여수, 익산 등 '시' 이름으로 발화하면 가까운 대표 도시의 정보를 보여줍니다.
 근처에서, 우리 동네에서와 같은 발화에서도 위도·경도를 기반으로 현재 위치를 특정하고, 가장 가까운 대표 도시를 기준으로 정보를 보여줍니다.
 
+### Capsule의 상세 화면
 
-0. Capsule의 상세 화면
-- 발화 화면
-- 선택 화면
-- 최종 화면
+![1](images/1.png)
 
 
 
-1. API서버 제공 데이터
-- 사용자 위치 기반 
-    action (String) : getItemList
-    itemname (String-encoding(utf-8)) : 농수산물의 이름(한글처리를 위해 UTF-8 인코딩)
-    lat (String) : 경도
-    rat (String) : 위도
+### API 서버 제공 데이터
+
+#### 사용자 위치 기반 
+action (String) : getItemList
+itemname (String-encoding(utf-8)) : 농수산물의 이름(한글처리를 위해 UTF-8 인코딩)
+lat (String) : 경도
+rat (String) : 위도
 {"count":1,"location":"전주","data":[{"itemgroupcode":"100","itemgroupname":"식량작물","itemcode":"152","itemname":"감자","kindcode":"01","kindname":"수미","productrankcode":"04","imgURL":"https://www.kamis.or.kr/ckeditor/imageUpload/g1_1546394536006.JPG"}],"food":[{"foodName":"감자","maxP":2300,"minP":1980,"medP":2140,"resentP":2140,"persent":0,"chartURL":"http://serverIP:8080/bixby/charts/100_152_01_04_3511.jpg","msg":"평균가격 보다 0% 더 비쌉니다.","date":"2019-10-30","unit":"1kg"}],"msg":"200"}
 
-- 발화 위치 기반
-    action (String) : getItemListandlocation
-    itemname (String-encoding(utf-8)) : 농수산물의 이름(한글처리를 위해 UTF-8 인코딩)
-    location(String-encoding(utf-8)) : 발화지역명(한글처리를 위해 UTF-8 인코딩)
-    lat (String) : 경도
-    rat (String) : 위도
+
+
+#### 발화 위치 기반
+
+action (String) : getItemListandlocation
+itemname (String-encoding(utf-8)) : 농수산물의 이름(한글처리를 위해 UTF-8 인코딩)
+location(String-encoding(utf-8)) : 발화지역명(한글처리를 위해 UTF-8 인코딩)
+lat (String) : 경도
+rat (String) : 위도
 {"count":1,"location":"서울","data":[{"itemgroupcode":"100","itemgroupname":"식량작물","itemcode":"152","itemname":"감자","kindcode":"01","kindname":"수미","productrankcode":"04","imgURL":"https://www.kamis.or.kr/ckeditor/imageUpload/g1_1546394536006.JPG"}],"food":[{"foodName":"감자","maxP":2300,"minP":1700,"medP":2076,"resentP":2080,"persent":0,"chartURL":"http://serverIP:8080/bixby/charts/100_152_01_04_1101.jpg","msg":"평균가격 보다 0% 더 비쌉니다.","date":"2019-10-30","unit":"1kg"}],"msg":"200"}
 
-2. 지역 매핑
+
+
+#### 지역 매핑
 서울, 부산, 대구, 인천, 광주, 대전, 울산, 세종, 수원, 의정부, 춘천, 청주, 전주, 순천, 포항, 안동, 창원, 제주
 위의 18개 도시와 더불어 강원 - 춘천, 경남 - 부산, 경북 - 포항, 충남 - 대전, 충북 - 청주, 전남 - 순천, 전북 - 전주, 경기 - 수원으로 각각 매핑되어 
 있습니다.
@@ -81,7 +89,8 @@ vocab(LocaName) {
 
 
 
-3. 에러 처리
+### 에러 처리
+
 NotFoundData : 농수산물 이름이 데이터베이스에 존재하지 않는 경우
 NotFoundLocation : 미리 지정한 지역 범주(vocab) 외의 지역을 입력받는 경우
 NoHaveJson : 해당 농수산물의 최근 정보가 없는 경우
